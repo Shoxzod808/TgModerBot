@@ -5,13 +5,13 @@ from aiogram.utils import executor
 from apscheduler.schedulers.asyncio import AsyncIOScheduler 
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
-from states import Test 
+from states import New_chanel 
 
 
 import config
 from commands import start_command
 from handlers import callback_query, handler
-from state_handler import test_handler, name_handler
+from state_handler import test_handler
 
 storage = MemoryStorage()
 bot = Bot(token=config.TOKEN, parse_mode=ParseMode.HTML)
@@ -53,14 +53,14 @@ async def text_message_handler(message):
 async def channel_handler(message):
     await handler(bot, message)
 
-@dp.message_handler(content_types=ContentType.TEXT, state=Test.chat_id)
+@dp.message_handler(content_types=ContentType.all(), state=New_chanel.info)
 async def test_message_handler(message: Message, state: FSMContext):
     await test_handler(bot, message, state)
 
 
-@dp.message_handler(content_types=ContentType.TEXT, state=Test.name)
+""" @dp.message_handler(content_types=ContentType.TEXT, state=Test.name)
 async def name_message_handler(message: Message, state: FSMContext):
-    await name_handler(bot, message, state)
+    await name_handler(bot, message, state) """
 
 
 

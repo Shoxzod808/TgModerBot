@@ -8,7 +8,6 @@ import functions
 
 #TopMuzicBot
 async def start_command(bot: Bot, message: Message):
-    print(message)
     if not await decorators.is_bot(message):
         chat_id = message.from_user.id
         if not await decorators.exists(chat_id):

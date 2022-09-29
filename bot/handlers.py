@@ -1,7 +1,7 @@
 from aiogram.types import CallbackQuery, Message
 from aiogram import Bot
 from bot.functions import add_chanel
-from states import Test
+from states import New_chanel
 
 
 import decorators
@@ -29,9 +29,9 @@ async def callback_query(bot: Bot, call: CallbackQuery):
     elif data == 'new_chat':
         await functions.send_post_add_new_chat(bot, chat_id)
 
-    elif data == 'chanel':
+    elif data == 'new_chanel':
         await add_chanel(bot, chat_id)
-        await Test.chat_id.set()
+        await New_chanel.info.set()
     
     elif data == 'my_chats':
         await functions.my_chats(bot, chat_id)
