@@ -12,7 +12,8 @@ async def send_menu(bot: Bot, chat_id):
     text = await decorators.get_text(title='menu text', chat_id=chat_id)
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(
-        InlineKeyboardButton(text='Подключить новый чат', callback_data='new_chat'),  
+        InlineKeyboardButton(text='Подключить чат', callback_data='new_chat'),  
+        InlineKeyboardButton(text='Подключить канал', callback_data='new_chanel'),  
         InlineKeyboardButton(text='Подключённые чаты', callback_data='my_chats') 
     )
     await bot.send_message(chat_id, text, reply_markup=keyboard)
@@ -37,3 +38,12 @@ async def send_post_add_new_chat(bot: Bot, chat_id):
         )
     )
     await bot.send_message(chat_id, text, reply_markup=keyboard, disable_web_page_preview=True)
+
+async def in_developing(bot: Bot, chat_id):
+    text = await decorators.get_text(title='in_developing', chat_id=chat_id)
+    await bot.send_message(chat_id, text)
+
+async def add_chanel(bot: Bot, chat_id):
+    text = await decorators.get_text(title='addchanel', chat_id=chat_id)
+    await bot.send_message(chat_id, text)
+    
