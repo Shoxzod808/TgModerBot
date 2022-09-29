@@ -47,3 +47,6 @@ async def add_chanel(bot: Bot, chat_id):
     text = await decorators.get_text(title='addchanel', chat_id=chat_id)
     await bot.send_message(chat_id, text)
     
+async def my_chats(bot: Bot, chat_id):
+    text = await decorators.get_text(title='my_chats', chat_id=chat_id)    
+    await bot.send_message(chat_id, text)

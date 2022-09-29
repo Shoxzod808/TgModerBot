@@ -11,7 +11,7 @@ from states import Test
 import config
 from commands import start_command
 from handlers import callback_query, handler
-
+from state_handler import test_handler, name_handler
 
 storage = MemoryStorage()
 bot = Bot(token=config.TOKEN, parse_mode=ParseMode.HTML)
@@ -55,33 +55,12 @@ async def channel_handler(message):
 
 @dp.message_handler(content_types=ContentType.TEXT, state=Test.chat_id)
 async def test_message_handler(message: Message, state: FSMContext):
-    chat_id = message.from_user.id
-
-    async with state.proxy() as data:
-        data['chat_id'] = chat_id
-
-    await message.reply('asdasdas')
-    await Test.next()
-
-
+    await test_handler(bot, message, state)
 
 
 @dp.message_handler(content_types=ContentType.TEXT, state=Test.name)
 async def name_message_handler(message: Message, state: FSMContext):
-    chat_id = message.from_user.id
-
-    async with state.proxy() as data:
-        data['name'] = message.from_user.first_name 
-
-    
-    data = await state.get_data()
-    user_id = data['chat_id']
-    name = data['name']
-    await state.finish()
-    text = ''
-    text += str(user_id) + ' ' + name
-    await bot.send_message(chat_id, text)
-
+    await name_handler(bot, message, state)
 
 
 
