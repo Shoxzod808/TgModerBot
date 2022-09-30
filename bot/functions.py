@@ -53,17 +53,25 @@ async def add_chanel(bot: Bot, chat_id):
     await bot.send_message(chat_id, text)
     
 async def my_chats(bot: Bot, chat_id, message_id):
-    text = await decorators.get_text(title='my_chats', chat_id=chat_id, button=True)    
+    text = await decorators.get_text(title='my_chats', chat_id=chat_id, button=True)   
 
     keyboard = InlineKeyboardMarkup()
-    keyboard.add(
-        InlineKeyboardButton(
-            text='Chanels',
-            callback_data='ch'
+    buttons = await decorators.get_list_chats(chat_id)
+    for group in buttons:
+        keyboard.add(
+            InlineKeyboardButton(
+                text=group.title,
+                callback_data=f'CHAT-{group.id}'
+            )
         )
-    )
-    await bot.edit_message_text(text, chat_id, message_id)
-    await bot.edit_message_reply_markup(chat_id, message_id, reply_markup=keyboard)
+    text2button = await decorators.get_text(title='back', chat_id=chat_id, button=True)
+    keyboard.add(
+            InlineKeyboardButton(
+                text=text2button,
+                callback_data='menu'
+            )
+        )    
+    await bot.edit_message_text(text, chat_id, message_id, reply_markup=keyboard)
 
 
 
@@ -73,16 +81,55 @@ async def fprint(text) -> None:
 
 
 async def get_chanel_info(title, username, link, description, members_count, chat_id):
-    t = await decorators.get_text('title', chat_id, button=True)
     u = await decorators.get_text('username', chat_id, button=True)
     l = await decorators.get_text('link', chat_id, button=True)
     m = await decorators.get_text('memberscount', chat_id, button=True)
     d = await decorators.get_text('description', chat_id, button=True)
-    text = f'''
-    {title}:
-    {u}: {username}
-    {l}: {link} 
-    {m}: {members_count}
-    {d}: {description}
-'''
-    return text
+    
+    return f'{title}:\n\t{u}: {username}\n\t{l}: {link}\n\t{m}: {members_count}\n\t{d}: {description}'
+
+
+async def chat_config(bot, call):
+    chat_id = call.from_user.id
+    message_id = call.message.message_id
+    group_id = call.data.split('-')[1]
+    group = await decorators.get_group(group_id)
+    text = await get_chanel_info(
+        title=group.title,
+        username=group.username,
+        link=group.link,
+        description=group.description,
+        members_count=group.users_count,
+        chat_id=chat_id
+    )
+    keyboard = InlineKeyboardMarkup(row_width=1)  
+
+    text2button1 = await decorators.get_text(title='White list', chat_id=chat_id, button=True)
+    text2button2 = await decorators.get_text(title='Black list', chat_id=chat_id, button=True)
+    text2button3 = await decorators.get_text(title='Copy filter', chat_id=chat_id, button=True)
+
+    keyboard.add(
+            InlineKeyboardButton(
+                text=text2button1,
+                callback_data='White list'
+            ),
+            InlineKeyboardButton(
+                text=text2button2,
+                callback_data='Black list'
+            ),
+            InlineKeyboardButton(
+                text=text2button3,
+                callback_data='Copy filter'
+            )
+        )
+    
+    text2button = await decorators.get_text(title='back', chat_id=chat_id, button=True)
+    keyboard.add(
+            InlineKeyboardButton(
+                text=text2button,
+                callback_data='my_chats'
+            )
+        ) 
+    await bot.edit_message_text(text, chat_id, message_id, reply_markup=keyboard)
+    #await bot.edit_message_reply_markup(chat_id, message_id)
+ 
