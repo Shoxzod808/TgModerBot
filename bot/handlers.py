@@ -34,10 +34,10 @@ async def callback_query(bot: Bot, call: CallbackQuery):
         await New_chanel.info.set()
     
     elif data == 'my_chats':
-        await functions.my_chats(bot, chat_id)
+        await functions.my_chats(bot, chat_id, call.message.message_id)
         
     
 
 async def handler(bot: Bot, message: Message):
     pass
-    #print(message)
+    

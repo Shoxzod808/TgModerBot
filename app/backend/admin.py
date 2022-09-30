@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BotUser, Template
+from .models import BotUser, Template, Template2Button, Group
 
 @admin.register(BotUser)
 class BotUserAdmin(admin.ModelAdmin):
@@ -8,3 +8,11 @@ class BotUserAdmin(admin.ModelAdmin):
 @admin.register(Template)
 class TemplateAdmin(admin.ModelAdmin):
     list_display = ['title', 'body_ru', 'body_eng']
+
+@admin.register(Template2Button)
+class Template2ButtonAdmin(admin.ModelAdmin):
+    list_display = ['title', 'body_ru', 'body_eng']
+
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ['title', 'link', 'username', 'users_count', 'type', 'user']

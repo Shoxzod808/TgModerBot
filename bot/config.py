@@ -17,4 +17,5 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
 
 TOKEN = '2128617922:AAGrzZOzO2lGT4eXUlSiHxYkGNB1OYeAqOk'
+CHAT_ID = 2128617922
 CURRENT_URL = 'TopMuzicBot'
