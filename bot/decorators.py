@@ -1,4 +1,3 @@
-from typing import get_origin
 from aiogram.types import Message
 from asgiref.sync import sync_to_async
 import contextlib
