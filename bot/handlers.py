@@ -35,7 +35,13 @@ async def callback_query(bot: Bot, call: CallbackQuery):
     
     elif data == 'my_chats':
         await functions.my_chats(bot, chat_id, call.message.message_id)
-        
+    
+    elif 'CHAT-' in data:
+        await functions.chat_config(bot, call)
+    
+    elif data == 'menu':
+        await functions.send_menu(bot, chat_id)
+
     
 
 async def handler(bot: Bot, message: Message):
