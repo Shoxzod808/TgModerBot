@@ -26,7 +26,7 @@ async def test_handler(bot: Bot, message: Message, state: FSMContext):
             if not member.is_chat_admin():
                 raise RuntimeError
             chanel = await bot.get_chat(chanel_chat_id)
-            keys = [i for i in chanel.iter_keys()]
+            keys = list(chanel.iter_keys())
             info = {
                 'title':'',
                 'username': '-',
@@ -37,7 +37,7 @@ async def test_handler(bot: Bot, message: Message, state: FSMContext):
             if 'title' in keys:
                 info['title'] = chanel.title
             if 'username' in keys:
-                info['username'] = '@' + chanel.username
+                info['username'] = f'@{chanel.username}'
                 info['link'] = f' https://t.me/{chanel.username}'
             if 'description' in keys:
                 info['description'] = chanel.description
