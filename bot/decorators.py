@@ -9,8 +9,6 @@ from backend.models import BotUser, Template, Template2Button, Group
 def print_msg(func, text):
     print(f'from modul decorators({func}) -> ', text)
 
-
-
 @sync_to_async
 def add_user(message: Message) -> None:
     chat_id = message.from_user.id
@@ -78,3 +76,47 @@ def get_list_chats(chat_id) -> list:
 @sync_to_async
 def get_group(id):
     return Group.objects.get(id=id)
+
+@sync_to_async
+def set_group_bl_timer(n, id):
+    group = Group.objects.get(id=id)
+    group.black_list_timer = n
+    group.save()
+
+@sync_to_async
+def copy_filter(group_id, to_group_id):
+    if group_id != to_group_id:
+        from_group = Group.objects.get(id=group_id)
+        to_group = Group.objects.get(id=to_group_id)
+        to_group.black_list = from_group.black_list
+        to_group.enable_black_list = from_group.enable_black_list
+        to_group.black_list_timer = from_group.black_list_timer
+        to_group.white_list = from_group.white_list
+        to_group.enable_white_list = from_group.enable_white_list
+        to_group.save()
+
+@sync_to_async
+def edit_status_white_and_black_lists(group_id, type, data, chat_id):
+    group = Group.objects.get(id=group_id)
+    text = False
+    if '✅' in data:
+        if type == 'white':
+            group.enable_white_list = False
+        else:
+            group.enable_black_list = False
+    elif type == 'white':
+        if group.enable_black_list:
+            group.enable_black_list = False
+            text = Template.objects.get(title='black_or_white')
+            lang = BotUser.objects.get(chat_id=chat_id).language
+            text = text.body_ru if lang == 'ru' else text.body_eng
+        group.enable_white_list = True
+    elif type == 'black':
+        if group.enable_white_list:
+            group.enable_white_list = False
+            text = Template.objects.get(title='black_or_white')
+            lang = BotUser.objects.get(chat_id=chat_id).language
+            text = text.body_ru if lang == 'ru' else text.body_eng
+        group.enable_black_list = True
+    group.save()
+    return text

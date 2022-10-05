@@ -50,22 +50,26 @@ class Template2Button(models.Model):
         return self.title
 
 class Group(models.Model):
-    title = models.CharField(max_length=255)
-    username = models.CharField(max_length=255, default='-')
-    link = models.CharField(max_length=255, default='-')
-    description = models.TextField(default='-')
-    users_count = models.IntegerField(default=0)
-    chat_id = models.IntegerField()
-    black_list = models.TextField(default='-')
-    white_list = models.TextField(default='-')
-    user = models.ForeignKey(BotUser, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, verbose_name='Названия')
+    username = models.CharField(max_length=255, default='-', verbose_name='Никнейм')
+    link = models.CharField(max_length=255, default='-', verbose_name='Ссылка')
+    description = models.TextField(default='-', verbose_name='Описания')
+    users_count = models.IntegerField(default=0, verbose_name='Кол-во пользователей')
+    chat_id = models.IntegerField(default=10, verbose_name='Чат айди')
+    black_list = models.TextField(default='-', verbose_name='Черный список')
+    enable_black_list = models.BooleanField(default=False, verbose_name='Вкл/Выкл черный список')
+    black_list_timer = models.IntegerField(default=10, verbose_name='Таймер черного списка')
+    white_list = models.TextField(default='-', verbose_name='Белый список')
+    enable_white_list = models.BooleanField(default=False, verbose_name='Вкл/Выкл белый список')
+    user = models.ForeignKey(BotUser, on_delete=models.CASCADE, verbose_name='Пользователь')
     type = models.CharField(
         max_length=255, 
         choices=(
             ('Chanel', 'Канал'),
             ('Chat', 'Чат')
         ),
-        default='Chanel'
+        default='Chanel', 
+        verbose_name='Тип'
         )
 
 

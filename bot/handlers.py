@@ -42,7 +42,29 @@ async def callback_query(bot: Bot, call: CallbackQuery):
     elif data == 'menu':
         await functions.send_menu(bot, chat_id)
 
+    elif 'White list' in data:
+        await functions.white_list(bot, call)
+
+    elif 'Black list' in data:
+        await functions.black_list(bot, call)
     
+    elif 'Timer' in data:
+        await functions.timer_black_list(bot, call)
+
+    elif 'TIMES' in data:
+        await functions.edit_timer_black_list(bot, call)
+
+    elif 'Copy filter' in data:
+        await functions.copy_filter_choice_chat(bot, call)
+    elif 'copy' in data:
+        await functions.copy_filter(bot, call)
+
+    elif 'statuswhitelist' in data:
+        await functions.statuswhitelist(bot, call)
+
+    elif 'statusblacklist' in data:
+        await functions.statusblacklist(bot, call)
+
 
 async def handler(bot: Bot, message: Message):
     pass
