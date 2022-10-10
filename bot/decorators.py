@@ -1,7 +1,7 @@
 from aiogram.types import Message
 from asgiref.sync import sync_to_async
 import contextlib
-
+from django.db import models
 import config
 from backend.models import BotUser, Template, Template2Button, Group
 
@@ -74,8 +74,16 @@ def get_list_chats(chat_id) -> list:
     return buttons
 
 @sync_to_async
-def get_group(id):
+def get_group(id) -> models.Model:
     return Group.objects.get(id=id)
+
+@sync_to_async
+def get_group_wlist(id) -> models.Model:
+    return Group.objects.get(id=id).white_list
+
+@sync_to_async
+def get_group_blist(id) -> models.Model:
+    return Group.objects.get(id=id).black_list
 
 @sync_to_async
 def set_group_bl_timer(n, id):
@@ -120,3 +128,27 @@ def edit_status_white_and_black_lists(group_id, type, data, chat_id):
         group.enable_black_list = True
     group.save()
     return text
+
+@sync_to_async
+def edit_group_id2user(chat_id, id):
+    user = BotUser.objects.get(chat_id=chat_id)
+    user.group_id_state = id
+    user.save()
+
+@sync_to_async
+def get_user(chat_id) -> models.Model:
+    return BotUser.objects.get(chat_id=chat_id)
+
+@sync_to_async
+def get_user_group_id_state(chat_id):
+    return BotUser.objects.get(chat_id=chat_id).group_id_state
+
+@sync_to_async
+def set_group_white_or_black_list(id, lst, text):
+    group = Group.objects.get(id=id)
+    if lst == 'white':
+        group.white_list = text
+    else:
+        group.black_list = text
+    group.save()
+

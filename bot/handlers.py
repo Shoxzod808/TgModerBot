@@ -1,7 +1,7 @@
 from aiogram.types import CallbackQuery, Message
 from aiogram import Bot
 from bot.functions import add_chanel
-from states import New_chanel
+from states import New_chanel, Edit_black_list, Edit_white_list
 
 
 import decorators
@@ -20,6 +20,7 @@ async def callback_query(bot: Bot, call: CallbackQuery):
         await call.message.delete()
         await decorators.add_user(call)
         await functions.send_language_post(bot, chat_id)
+    
     elif data in ['ru', 'eng']:
         await call.message.delete()
         await decorators.set_user_language(chat_id, data)
@@ -56,6 +57,7 @@ async def callback_query(bot: Bot, call: CallbackQuery):
 
     elif 'Copy filter' in data:
         await functions.copy_filter_choice_chat(bot, call)
+    
     elif 'copy' in data:
         await functions.copy_filter(bot, call)
 
@@ -65,7 +67,16 @@ async def callback_query(bot: Bot, call: CallbackQuery):
     elif 'statusblacklist' in data:
         await functions.statusblacklist(bot, call)
 
+    elif 'Edit wlist' in data:
+        await functions.edit_white_list(bot, call)
+        group_id = call.data.split('-')[1]
+        await decorators.edit_group_id2user(chat_id, group_id)
+        await Edit_white_list.data.set()
 
-async def handler(bot: Bot, message: Message):
-    pass
-    
+    elif 'Edit blist' in data:
+        await functions.edit_black_list(bot, call)
+        group_id = call.data.split('-')[1]
+        await decorators.edit_group_id2user(chat_id, group_id)
+        await Edit_black_list.data.set()
+
+

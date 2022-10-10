@@ -5,6 +5,7 @@ class BotUser(models.Model):
     chat_id = models.IntegerField(unique=True, verbose_name='Айди')
     full_name = models.CharField(max_length=255, verbose_name='Полное имя')
     username = models.CharField(max_length=255, null=True, blank=True, verbose_name='Никнейм')
+    group_id_state = models.CharField(max_length=255,default=0)
     language = models.CharField(
         max_length=5,
         choices=(

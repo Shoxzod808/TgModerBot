@@ -2,9 +2,11 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
 from aiogram import Bot
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from bot.functions import black_list
 from config import CHAT_ID
 import decorators
 import functions
+
 
 from states import New_chanel
 
@@ -16,7 +18,6 @@ async def print_msg(func, text):
 
 async def test_handler(bot: Bot, message: Message, state: FSMContext):
     chat_id = message.from_user.id
-    await functions.fprint(message)
     try:
         if message.text == '/stop':
             raise ValueError
@@ -88,20 +89,40 @@ async def test_handler(bot: Bot, message: Message, state: FSMContext):
         await New_chanel.info.set()
     
 
-    
-
-
-""" async def name_handler(bot: Bot, message: Message, state: FSMContext):
+async def edit_white_list(bot: Bot, message: Message, state: FSMContext):
     chat_id = message.from_user.id
+    group_id = await decorators.get_user_group_id_state(chat_id)
+    text = message.text
+    try:
+        if text == '/empty':
+            await decorators.set_group_white_or_black_list(group_id, 'white', '-')
+        else:
+            await decorators.set_group_white_or_black_list(group_id, 'white', text)
+    except Exception as e:
+        print('STATE EX PRINT(E)', e)
+    finally:
+        keyboard = InlineKeyboardMarkup()
+        text2button = await decorators.get_text(title='back', chat_id=chat_id, button=True)
+        keyboard.add(InlineKeyboardButton(text2button, callback_data=f'White list-{group_id}'))
+        text = await decorators.get_text('data edited', chat_id)
+        await bot.send_message(chat_id, text, reply_markup=keyboard)
+        await state.finish()
 
-    async with state.proxy() as data:
-        data['name'] = message.from_user.first_name 
-
-  
-    data = await state.get_data()
-    user_id = data['chat_id']
-    name = data['name']
-    await state.finish()
-    text = ''
-    text += str(user_id) + ' ' + name
-    await bot.send_message(chat_id, text) """
+async def edit_black_list(bot: Bot, message: Message, state: FSMContext):
+    chat_id = message.from_user.id
+    group_id = await decorators.get_user_group_id_state(chat_id)
+    text = message.text
+    try:
+        if text == '/empty':
+            await decorators.set_group_white_or_black_list(group_id, 'black', '-')
+        else:
+            await decorators.set_group_white_or_black_list(group_id, 'black', text)
+    except Exception as e:
+        print('STATE EX PRINT(E)', e)
+    finally:
+        keyboard = InlineKeyboardMarkup()
+        text2button = await decorators.get_text(title='back', chat_id=chat_id, button=True)
+        keyboard.add(InlineKeyboardButton(text2button, callback_data=f'Black list-{group_id}'))
+        text = await decorators.get_text('data edited', chat_id)
+        await bot.send_message(chat_id, text, reply_markup=keyboard)
+        await state.finish()

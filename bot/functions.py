@@ -172,7 +172,7 @@ async def black_list(bot: Bot, call) -> None:
     message_id = call.message.message_id
     group_id = int(call.data.split('-')[1])
     group = await decorators.get_group(group_id)
-    text = group.white_list
+    text = group.black_list
     keyboard = InlineKeyboardMarkup(row_width=1)  
 
     text2button = await decorators.get_text(title='Edit black list', chat_id=chat_id, button=True)
@@ -339,6 +339,7 @@ async def statuswhitelist(bot: Bot, call):
             )
         )
     await bot.edit_message_reply_markup(chat_id, message_id, reply_markup=keyboard)
+
 async def statusblacklist(bot: Bot, call):
     chat_id = call.from_user.id
     message_id = call.message.message_id
@@ -378,3 +379,20 @@ async def statusblacklist(bot: Bot, call):
         )
     await bot.edit_message_reply_markup(chat_id, message_id, reply_markup=keyboard)
 
+async def edit_white_list(bot: Bot, call):
+    chat_id = call.from_user.id
+    group_id = call.data.split('-')[1]
+    text = await decorators.get_group_wlist(id = group_id)
+    await bot.send_message(chat_id, text)
+    message_id = call.message.message_id
+    text = await decorators.get_text(title='edit white or black list', chat_id=chat_id)
+    await bot.edit_message_text(text, chat_id, message_id, reply_markup=InlineKeyboardMarkup())
+
+async def edit_black_list(bot: Bot, call):
+    chat_id = call.from_user.id
+    group_id = call.data.split('-')[1]
+    text = await decorators.get_group_blist(id = group_id)
+    await bot.send_message(chat_id, text)
+    message_id = call.message.message_id
+    text = await decorators.get_text(title='edit white or black list', chat_id=chat_id)
+    await bot.edit_message_text(text, chat_id, message_id, reply_markup=InlineKeyboardMarkup())

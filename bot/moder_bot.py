@@ -5,13 +5,13 @@ from aiogram.utils import executor
 from apscheduler.schedulers.asyncio import AsyncIOScheduler 
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
-from states import New_chanel 
-
+from states import New_chanel, Edit_white_list, Edit_black_list
+from filter import handler, chanel_handler
 
 import config
 from commands import start_command
-from handlers import callback_query, handler
-from state_handler import test_handler
+from handlers import callback_query
+from state_handler import test_handler, edit_white_list, edit_black_list
 
 storage = MemoryStorage()
 bot = Bot(token=config.TOKEN, parse_mode=ParseMode.HTML)
@@ -45,24 +45,30 @@ async def callback_query_handler(call):
 async def start_message_handler(message):
     await start_command(bot, message)
 
-@dp.message_handler()
+
+
+@dp.channel_post_handler(content_types=ContentType.all())
+async def channel_handler(message):
+    await chanel_handler(bot, message)
+
+@dp.message_handler(content_types=ContentType.all())
 async def text_message_handler(message):
     await handler(bot, message)
 
-@dp.channel_post_handler()
-async def channel_handler(message):
-    await handler(bot, message)
+
 
 @dp.message_handler(content_types=ContentType.all(), state=New_chanel.info)
 async def test_message_handler(message: Message, state: FSMContext):
     await test_handler(bot, message, state)
 
 
-""" @dp.message_handler(content_types=ContentType.TEXT, state=Test.name)
-async def name_message_handler(message: Message, state: FSMContext):
-    await name_handler(bot, message, state) """
+@dp.message_handler(content_types=ContentType.TEXT, state=Edit_white_list.data)
+async def white_list_message_handler(message: Message, state: FSMContext):
+    await edit_white_list(bot, message, state)
 
-
+@dp.message_handler(content_types=ContentType.TEXT, state=Edit_black_list.data)
+async def black_list_message_handler(message: Message, state: FSMContext):
+    await edit_black_list(bot, message, state)
 
 if __name__ == '__main__':
     scheduler.start()
