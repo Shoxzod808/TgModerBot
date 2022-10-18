@@ -51,6 +51,13 @@ def set_user_language(chat_id, lang):
 @sync_to_async
 def create_group(title, username, link, description, members_count, chat_id, chanel_chat_id, type):
     user = BotUser.objects.get(chat_id=chat_id)
+    black_list='-'
+    white_list='-'
+    gr = Group.objects.filter(user=user)
+    if gr.exists():
+        gr = gr[-1]
+        black_list = gr.black_list
+        white_list = gr.white_list
     return Group.objects.create(
         chat_id=chanel_chat_id,
         title=title,
@@ -58,8 +65,8 @@ def create_group(title, username, link, description, members_count, chat_id, cha
         link=link, 
         description=description, 
         users_count=members_count, 
-        black_list='-', 
-        white_list='-', 
+        black_list=black_list, 
+        white_list=white_list, 
         user=user, 
         type=type
         )

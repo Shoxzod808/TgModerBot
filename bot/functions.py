@@ -212,8 +212,8 @@ async def timer_black_list(bot: Bot, call) -> None:
     group_id = int(group_id)
     group = await decorators.get_group(group_id)
     text = await decorators.get_text(title='edit timer', chat_id=chat_id)
-    keyboard = InlineKeyboardMarkup(row_width=4)
-    times = {10: '10', 20: '20', 30: '30', 60: '60', group.black_list_timer: f'{group.black_list_timer}✅'}
+    keyboard = InlineKeyboardMarkup(row_width=5)
+    times = {0: '0', 10: '10', 20: '20', 30: '30', 60: '60', group.black_list_timer: f'{group.black_list_timer}✅'}
     keyboard.add(*[InlineKeyboardButton(text=i, callback_data=f'TIMES-{i}:{group_id}') for i in times.values()])
 
     text2button = await decorators.get_text(title='back', chat_id=chat_id, button=True)

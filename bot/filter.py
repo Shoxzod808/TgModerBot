@@ -12,20 +12,20 @@ def check_filter(chat_id, text) -> bool:
         return False
     group = group[0]
     if group.enable_white_list:
-        keys = group.white_list
+        keys = group.white_list.split('&')
+        return all(key.strip().lower() not in text.lower() for key in keys)
+
     elif group.enable_black_list:
         keys = group.black_list.split('&')
-        print(keys)
         if len(keys) == 1 and keys[0] == '-':
             return False
-        return True if text in keys else True
+        for key in keys:
+
+            if key.strip().lower() in text.lower():
+                return True
     return False
 
-
 async def handler(bot: Bot, message: Message):
-    await fprint(message)
-
-async def chanel_handler(bot: Bot, message: Message):
     chat_id = message.chat.id
     text = message.text if 'text' in message.iter_keys() else message.caption if 'caption' in message.iter_keys() else False
     if text:

@@ -6,7 +6,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from states import New_chanel, Edit_white_list, Edit_black_list
-from filter import handler, chanel_handler
+from filter import handler
 
 import config
 from commands import start_command
@@ -49,7 +49,7 @@ async def start_message_handler(message):
 
 @dp.channel_post_handler(content_types=ContentType.all())
 async def channel_handler(message):
-    await chanel_handler(bot, message)
+    await handler(bot, message)
 
 @dp.message_handler(content_types=ContentType.all())
 async def text_message_handler(message):
