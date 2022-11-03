@@ -52,8 +52,8 @@ class Template2Button(models.Model):
 
 class Group(models.Model):
     title = models.CharField(max_length=255, verbose_name='Названия')
-    username = models.CharField(max_length=255, default='-', verbose_name='Никнейм')
-    link = models.CharField(max_length=255, default='-', verbose_name='Ссылка')
+    username = models.CharField(max_length=255, default='-', verbose_name='Никнейм', blank=True)
+    link = models.CharField(max_length=255, default='-', verbose_name='Ссылка', blank=True)
     description = models.TextField(default='-', verbose_name='Описания')
     users_count = models.IntegerField(default=0, verbose_name='Кол-во пользователей')
     chat_id = models.IntegerField(default=10, verbose_name='Чат айди')
@@ -72,7 +72,12 @@ class Group(models.Model):
         default='Chanel', 
         verbose_name='Тип'
         )
-
+    filter_photo = models.BooleanField(default=True, verbose_name='Фото')
+    filter_text = models.BooleanField(default=True, verbose_name='Текст')
+    filter_voice = models.BooleanField(default=True, verbose_name='Голосовое')
+    filter_video_note = models.BooleanField(default=True, verbose_name='Кружок')
+    filter_video = models.BooleanField(default=True, verbose_name='Видео')
+    filter_document = models.BooleanField(default=True, verbose_name='Документ')
 
     class Meta:
          verbose_name = "Чат"

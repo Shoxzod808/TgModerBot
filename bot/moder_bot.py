@@ -53,6 +53,7 @@ async def channel_handler(message):
 
 @dp.message_handler(content_types=ContentType.all())
 async def text_message_handler(message):
+    print(message.content_type)
     await handler(bot, message)
 
 

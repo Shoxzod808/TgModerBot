@@ -1,7 +1,7 @@
 from aiogram.types import Message
 from aiogram import Bot
 from bot.config import CHAT_ID
-
+from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 import decorators
 import functions
@@ -62,7 +62,12 @@ async def start_command(bot: Bot, message: Message):
                             members_count=await bot.get_chat_members_count(group_chat_id),
                             chat_id=chat_id
                         )
-                        await bot.send_message(chat_id, text)
+                        keyboard = InlineKeyboardMarkup()
+                        text2button3 = await decorators.get_text(title='my_chats', chat_id=chat_id, button=True)
+                        keyboard.add(
+                            InlineKeyboardButton(text=text2button3, callback_data='my_chats') 
+                        )
+                        await bot.send_message(chat_id, text, reply_markup=keyboard)
             else:
                 if message.chat.id == chat_id:
                     await functions.send_menu(bot, chat_id)

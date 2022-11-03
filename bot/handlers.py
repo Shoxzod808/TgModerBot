@@ -48,6 +48,9 @@ async def callback_query(bot: Bot, call: CallbackQuery):
 
     elif 'Black list' in data:
         await functions.black_list(bot, call)
+
+    elif 'Filter type' in data:
+        await functions.filtertypes(bot, call)   
     
     elif 'Timer' in data:
         await functions.timer_black_list(bot, call)

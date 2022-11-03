@@ -55,7 +55,7 @@ def create_group(title, username, link, description, members_count, chat_id, cha
     white_list='-'
     gr = Group.objects.filter(user=user)
     if gr.exists():
-        gr = gr[-1]
+        gr = gr[len(gr)-1]
         black_list = gr.black_list
         white_list = gr.white_list
     return Group.objects.create(

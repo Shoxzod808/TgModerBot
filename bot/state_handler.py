@@ -35,16 +35,25 @@ async def test_handler(bot: Bot, message: Message, state: FSMContext):
                 'description': '-',
                 'members_count': 0
             }
+            info['title'] = ''
             if 'title' in keys:
                 info['title'] = chanel.title
+            info['username'] = ''
+            info['link'] = ''
             if 'username' in keys:
                 info['username'] = f'@{chanel.username}'
                 info['link'] = f' https://t.me/{chanel.username}'
+            info['description'] = ''
             if 'description' in keys:
                 info['description'] = chanel.description
             info['members_count'] = await bot.get_chat_members_count(chanel_chat_id)
             text = await decorators.get_text(title='chaneladded', chat_id=chat_id)
             await bot.send_message(chat_id, text, disable_web_page_preview=True)
+            keyboard = InlineKeyboardMarkup()
+            text2button3 = await decorators.get_text(title='my_chats', chat_id=chat_id, button=True)
+            keyboard.add(
+                InlineKeyboardButton(text=text2button3, callback_data='my_chats') 
+            )
             text = await functions.get_chanel_info(
                 title=info['title'],
                 username=info['username'],
@@ -54,7 +63,7 @@ async def test_handler(bot: Bot, message: Message, state: FSMContext):
                 chat_id=chat_id
             )
 
-            await bot.send_message(chat_id, text, disable_web_page_preview=True)
+            await bot.send_message(chat_id, text, disable_web_page_preview=True, reply_markup=keyboard)
             await decorators.create_group(
                 title=info['title'],
                 username=info['username'],
@@ -96,6 +105,8 @@ async def edit_white_list(bot: Bot, message: Message, state: FSMContext):
     try:
         if text == '/empty':
             await decorators.set_group_white_or_black_list(group_id, 'white', '-')
+        elif text == '/stop':
+            pass
         else:
             await decorators.set_group_white_or_black_list(group_id, 'white', text)
     except Exception as e:
@@ -115,6 +126,8 @@ async def edit_black_list(bot: Bot, message: Message, state: FSMContext):
     try:
         if text == '/empty':
             await decorators.set_group_white_or_black_list(group_id, 'black', '-')
+        elif text == '/stop':
+            pass
         else:
             await decorators.set_group_white_or_black_list(group_id, 'black', text)
     except Exception as e:

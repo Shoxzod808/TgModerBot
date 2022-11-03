@@ -105,6 +105,7 @@ async def chat_config(bot: Bot, call) -> None:
     text2button1 = await decorators.get_text(title='White list', chat_id=chat_id, button=True)
     text2button2 = await decorators.get_text(title='Black list', chat_id=chat_id, button=True)
     text2button3 = await decorators.get_text(title='Copy filter', chat_id=chat_id, button=True)
+    text2button4 = await decorators.get_text(title='Filter type', chat_id=chat_id, button=True)
 
     keyboard.add(
             InlineKeyboardButton(
@@ -118,7 +119,13 @@ async def chat_config(bot: Bot, call) -> None:
             InlineKeyboardButton(
                 text=text2button3,
                 callback_data=f'Copy filter-{group_id}'
+            ),
+            InlineKeyboardButton(
+                text=text2button4,
+                callback_data=f'Filter type-{group_id}'
             )
+            
+            
         )
     
     text2button = await decorators.get_text(title='back', chat_id=chat_id, button=True)
@@ -205,6 +212,67 @@ async def black_list(bot: Bot, call) -> None:
         )
     await bot.edit_message_text(text, chat_id, message_id, reply_markup=keyboard)
 
+async def filtertypes(bot: Bot, call) -> None:
+    chat_id = call.from_user.id
+    message_id = call.message.message_id
+    group_id = int(call.data.split('-')[1])
+    group = await decorators.get_group(group_id)
+    text = await decorators.get_text(title='filtertypes', chat_id=chat_id)
+    keyboard = InlineKeyboardMarkup(row_width=3)
+
+    ftext = await decorators.get_text(title='ftext', chat_id=chat_id, button=True)
+    fphoto = await decorators.get_text(title='fphoto', chat_id=chat_id, button=True)
+    fvoice = await decorators.get_text(title='fvoice', chat_id=chat_id, button=True)
+    fvideo_note = await decorators.get_text(title='fvideo_note', chat_id=chat_id, button=True)
+    fvideo = await decorators.get_text(title='fvideo', chat_id=chat_id, button=True)
+    fdocument = await decorators.get_text(title='fdocument', chat_id=chat_id, button=True)
+    if group.filter_photo:
+        fphoto += '✅'
+    if group.filter_text:
+        ftext += '✅'
+    if group.filter_voice:
+        fvoice += '✅'
+    if group.filter_video_note:
+        fvideo_note += '✅'
+    if group.filter_video:
+        fvideo += '✅'
+    if group.filter_document:
+        fdocument += '✅'
+    
+    keyboard.add(
+        InlineKeyboardButton(
+                text=ftext,
+                callback_data=f'TYPE-{group.id}-{1}'
+            ),
+        InlineKeyboardButton(
+                text=fphoto,
+                callback_data=f'TYPE-{group.id}-{2}'
+            ),
+        InlineKeyboardButton(
+                text=fvoice,
+                callback_data=f'TYPE-{group.id}-{3}'
+            ),
+        InlineKeyboardButton(
+                text=fvideo_note,
+                callback_data=f'TYPE-{group.id}-{4}'
+            ),
+        InlineKeyboardButton(
+                text=fvideo,
+                callback_data=f'TYPE-{group.id}-{5}'
+            ),
+        InlineKeyboardButton(
+                text=fdocument,
+                callback_data=f'TYPE-{group.id}-{6}'
+            )
+    )
+    text2button = await decorators.get_text(title='back', chat_id=chat_id, button=True)
+    keyboard.add(
+            InlineKeyboardButton(
+                text=text2button,
+                callback_data=f'CHAT-{group.id}'
+            )
+        )
+    await bot.edit_message_text(text, chat_id, message_id, reply_markup=keyboard)
 async def timer_black_list(bot: Bot, call) -> None:
     chat_id = call.from_user.id
     message_id = call.message.message_id
