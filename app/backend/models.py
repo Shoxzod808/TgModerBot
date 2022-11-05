@@ -25,7 +25,7 @@ class BotUser(models.Model):
          verbose_name_plural = 'Пользователи'
 
 class Template(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Названия текста')
+    title = models.CharField(max_length=255, verbose_name='Не трогать!!!!')
     body_ru = models.TextField(verbose_name='Русский текст')
     body_eng = models.TextField(verbose_name='Английский текст')
 
@@ -38,7 +38,7 @@ class Template(models.Model):
         return self.title
 
 class Template2Button(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Названия текста')
+    title = models.CharField(max_length=255, verbose_name='Не трогать!!!')
     body_ru = models.TextField(verbose_name='Русский текст')
     body_eng = models.TextField(verbose_name='Английский текст')
 

@@ -16,6 +16,6 @@ sys.path.append(APP_DIR_PATH)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
 
-TOKEN = '2128617922:AAGrzZOzO2lGT4eXUlSiHxYkGNB1OYeAqOk'
+TOKEN = '5789455316:AAGGUStzdBYktojQGb4-f8rpD79w93Ck6FU'
 CHAT_ID = 2128617922
-CURRENT_URL = 'TopMuzicBot'
+CURRENT_URL = 'FilterFastBot'

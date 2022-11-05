@@ -82,4 +82,7 @@ async def callback_query(bot: Bot, call: CallbackQuery):
         await decorators.edit_group_id2user(chat_id, group_id)
         await Edit_black_list.data.set()
 
+    elif 'TYPE-' in data:
+        await decorators.edit_type(call)
+        await functions.filtertypes(bot, call) 
 

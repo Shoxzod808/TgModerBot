@@ -119,7 +119,12 @@ def edit_status_white_and_black_lists(group_id, type, data, chat_id):
             group.enable_white_list = False
         else:
             group.enable_black_list = False
-    elif type == 'white':
+    else:
+        if type == 'white':
+            group.enable_white_list = True
+        else:
+            group.enable_black_list = True
+    """ elif type == 'white':
         if group.enable_black_list:
             group.enable_black_list = False
             text = Template.objects.get(title='black_or_white')
@@ -132,7 +137,7 @@ def edit_status_white_and_black_lists(group_id, type, data, chat_id):
             text = Template.objects.get(title='black_or_white')
             lang = BotUser.objects.get(chat_id=chat_id).language
             text = text.body_ru if lang == 'ru' else text.body_eng
-        group.enable_black_list = True
+        group.enable_black_list = True """
     group.save()
     return text
 
@@ -158,4 +163,47 @@ def set_group_white_or_black_list(id, lst, text):
     else:
         group.black_list = text
     group.save()
+
+
+@sync_to_async
+def edit_type(call):
+    data = call.data
+    _, group_id, type = data.split('-')
+    group = Group.objects.get(id=group_id)
+    if type == '1':
+        if group.filter_text:
+            group.filter_text = False
+        else:
+            group.filter_text = True
+
+    elif type == '2':
+        if group.filter_photo:
+            group.filter_photo = False
+        else:
+            group.filter_photo = True
+    
+    elif type == '3':
+        if group.filter_voice:
+            group.filter_voice = False
+        else:
+            group.filter_voice = True
+
+    elif type == '4':
+        if group.filter_video_note:
+            group.filter_video_note = False
+        else:
+            group.filter_video_note = True
+    
+    elif type == '5':
+        if group.filter_video:
+            group.filter_video = False
+        else:
+            group.filter_video = True
+
+    elif type == '6':
+        if group.filter_document:
+            group.filter_document = False
+        else:
+            group.filter_document = True
+        
 

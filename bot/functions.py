@@ -273,6 +273,7 @@ async def filtertypes(bot: Bot, call) -> None:
             )
         )
     await bot.edit_message_text(text, chat_id, message_id, reply_markup=keyboard)
+    
 async def timer_black_list(bot: Bot, call) -> None:
     chat_id = call.from_user.id
     message_id = call.message.message_id
