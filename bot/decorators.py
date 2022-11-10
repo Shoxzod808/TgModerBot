@@ -205,5 +205,5 @@ def edit_type(call):
             group.filter_document = False
         else:
             group.filter_document = True
-        
+    group.save()
 

@@ -17,5 +17,5 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
 
 TOKEN = '5789455316:AAGGUStzdBYktojQGb4-f8rpD79w93Ck6FU'
-CHAT_ID = 2128617922
+CHAT_ID = 5789455316
 CURRENT_URL = 'FilterFastBot'

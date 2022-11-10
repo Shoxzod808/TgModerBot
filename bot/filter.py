@@ -6,14 +6,20 @@ from backend.models import Group, BotUser
 from functions import fprint
 import asyncio
 
+@sync_to_async
+def get_group(message):
+    chat_id = message.chat.id
+    group = Group.objects.get(chat_id=chat_id)
+    return group
 
 @sync_to_async
-def checktype(message):
-    chat_id = message.chat.id
-    group = Group.objects.filter(chat_id=chat_id)
+def checkgroup(message):
+    group = Group.objects.filter(chat_id=message.chat.id)
     if not group.exists():
         return False
     return True
+
+
 
 @sync_to_async
 def check_filter(chat_id, text) -> bool:
@@ -36,12 +42,29 @@ def check_filter(chat_id, text) -> bool:
 
 async def handler(bot: Bot, message: Message):
     chat_id = message.chat.id
+    types = []
     text = message.text if 'text' in message.iter_keys() else message.caption if 'caption' in message.iter_keys() else False
-    if text:
-        if await checktype(message):
-            status, n = await check_filter(chat_id, text)
-            if status:
-                await asyncio.sleep(n)
+    if await checkgroup(message):
+        group = await get_group(message)
+        if group.filter_photo:
+            types.append('photo')
+        if group.filter_text:
+            types.append('text')
+        if group.filter_voice:
+            types.append('voice')
+        if group.filter_video_note:
+            types.append('video_note')
+        if group.filter_video:
+            types.append('video')
+        if group.filter_document:
+            types.append('document')
+        if message.content_type in types:
+            if text:
+                status, n = await check_filter(chat_id, text)
+                if status:
+                    await asyncio.sleep(n)
+                    await bot.delete_message(chat_id, message.message_id)
+            else:
                 await bot.delete_message(chat_id, message.message_id)
     else:
         await bot.delete_message(chat_id, message.message_id)
