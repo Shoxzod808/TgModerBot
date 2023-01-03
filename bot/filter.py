@@ -48,10 +48,12 @@ async def handler(bot: Bot, message: Message):
         group = await get_group(message)
         if group.filter_photo:
             types.append('photo')
+            types.append('animation')
         if group.filter_text:
             types.append('text')
         if group.filter_voice:
             types.append('voice')
+            types.append('audio')
         if group.filter_video_note:
             types.append('video_note')
         if group.filter_video:
@@ -67,4 +69,5 @@ async def handler(bot: Bot, message: Message):
             else:
                 await bot.delete_message(chat_id, message.message_id)
     else:
-        await bot.delete_message(chat_id, message.message_id)
+        pass
+        #await bot.delete_message(chat_id, message.message_id)

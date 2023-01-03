@@ -15,4 +15,4 @@ class Template2ButtonAdmin(admin.ModelAdmin):
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ['title', 'link', 'username', 'users_count', 'type', 'user']
+    list_display = ['title', 'chat_id', 'link', 'username', 'users_count', 'type', 'user']
