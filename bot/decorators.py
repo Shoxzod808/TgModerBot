@@ -205,5 +205,10 @@ def edit_type(call):
             group.filter_document = False
         else:
             group.filter_document = True
+    elif type == '7':
+        if group.filter_link_in_text:
+            group.filter_link_in_text = False
+        else:
+            group.filter_link_in_text = True
     group.save()
 

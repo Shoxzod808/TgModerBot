@@ -78,6 +78,7 @@ class Group(models.Model):
     filter_video_note = models.BooleanField(default=True, verbose_name='Кружок')
     filter_video = models.BooleanField(default=True, verbose_name='Видео')
     filter_document = models.BooleanField(default=True, verbose_name='Документ')
+    filter_link_in_text = models.BooleanField(default=False, verbose_name='Ссылки скрытые в тексте')
 
     class Meta:
          verbose_name = "Чат"

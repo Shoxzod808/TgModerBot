@@ -19,6 +19,17 @@ def checkgroup(message):
         return False
     return True
 
+@sync_to_async
+def check_hidden_links(chat_id, message):
+    group = Group.objects.get(chat_id=message.chat.id)
+    if not group.filter_link_in_text:
+        return True
+    try:
+        message['entities'][0].url
+        return False
+    except Exception as e:
+        pass
+    return True
 
 
 @sync_to_async
@@ -61,7 +72,7 @@ async def handler(bot: Bot, message: Message):
         if group.filter_document:
             types.append('document')
         if message.content_type in types:
-            if text:
+            if text and await check_hidden_links(chat_id, message):
                 status, n = await check_filter(chat_id, text)
                 if status:
                     await asyncio.sleep(n)

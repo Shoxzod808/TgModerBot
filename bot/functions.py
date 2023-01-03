@@ -218,7 +218,7 @@ async def filtertypes(bot: Bot, call) -> None:
     group_id = int(call.data.split('-')[1])
     group = await decorators.get_group(group_id)
     text = await decorators.get_text(title='filtertypes', chat_id=chat_id)
-    keyboard = InlineKeyboardMarkup(row_width=3)
+    keyboard = InlineKeyboardMarkup(row_width=1)
 
     ftext = await decorators.get_text(title='ftext', chat_id=chat_id, button=True)
     fphoto = await decorators.get_text(title='fphoto', chat_id=chat_id, button=True)
@@ -226,6 +226,7 @@ async def filtertypes(bot: Bot, call) -> None:
     fvideo_note = await decorators.get_text(title='fvideo_note', chat_id=chat_id, button=True)
     fvideo = await decorators.get_text(title='fvideo', chat_id=chat_id, button=True)
     fdocument = await decorators.get_text(title='fdocument', chat_id=chat_id, button=True)
+    fhidden_links = await decorators.get_text(title='hidden_links', chat_id=chat_id, button=True)
     if group.filter_photo:
         fphoto += '✅'
     if group.filter_text:
@@ -238,7 +239,8 @@ async def filtertypes(bot: Bot, call) -> None:
         fvideo += '✅'
     if group.filter_document:
         fdocument += '✅'
-    
+    if group.filter_link_in_text:
+        fhidden_links += '✅'
     keyboard.add(
         InlineKeyboardButton(
                 text=ftext,
@@ -263,6 +265,10 @@ async def filtertypes(bot: Bot, call) -> None:
         InlineKeyboardButton(
                 text=fdocument,
                 callback_data=f'TYPE-{group.id}-{6}'
+            ),
+        InlineKeyboardButton(
+                text=fhidden_links,
+                callback_data=f'TYPE-{group.id}-{7}'
             )
     )
     text2button = await decorators.get_text(title='back', chat_id=chat_id, button=True)

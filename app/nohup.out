@@ -1,0 +1,156 @@
+/root/ModerBot/app/backend/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 22, 2022 - 01:14:27
+Django version 3.1.6, using settings 'core.settings'
+Starting development server at http://0.0.0.0:1234/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/django/utils/autoreload.py", line 53, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/django/core/management/commands/runserver.py", line 110, in inner_run
+    autoreload.raise_last_exception()
+  File "/usr/local/lib/python3.8/dist-packages/django/utils/autoreload.py", line 76, in raise_last_exception
+    raise _exception[1]
+  File "/usr/local/lib/python3.8/dist-packages/django/core/management/__init__.py", line 357, in execute
+    autoreload.check_errors(django.setup)()
+  File "/usr/local/lib/python3.8/dist-packages/django/utils/autoreload.py", line 53, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/local/lib/python3.8/dist-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/usr/local/lib/python3.8/dist-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/root/ModerBot/app/backend/models.py", line 53, in <module>
+    class Group(models.Model):
+  File "/root/ModerBot/app/backend/models.py", line 81, in Group
+    filter_link_in_text = models.BooleanField(defa)
+NameError: name 'defa' is not defined
+/root/ModerBot/app/backend/models.py changed, reloading.
+Watching for file changes with StatReloader
+/root/ModerBot/app/backend/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 04, 2023 - 01:50:10
+Django version 3.1.6, using settings 'core.settings'
+Starting development server at http://0.0.0.0:1234/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+/root/ModerBot/app/backend/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 04, 2023 - 01:50:17
+Django version 3.1.6, using settings 'core.settings'
+Starting development server at http://0.0.0.0:1234/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[04/Jan/2023 01:52:06] "GET / HTTP/1.1" 200 16748
+[04/Jan/2023 01:52:06] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+Not Found: /favicon.ico
+[04/Jan/2023 01:52:06] "GET /favicon.ico HTTP/1.1" 404 1975
+[04/Jan/2023 01:52:06] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+[04/Jan/2023 01:52:07] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+[04/Jan/2023 01:52:07] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+[04/Jan/2023 01:52:07] "GET / HTTP/1.1" 200 16748
+[04/Jan/2023 01:52:08] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+[04/Jan/2023 01:52:08] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+[04/Jan/2023 01:52:08] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+[04/Jan/2023 01:52:08] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+[04/Jan/2023 01:52:13] "GET /admin HTTP/1.1" 301 0
+[04/Jan/2023 01:52:13] "GET /admin/ HTTP/1.1" 302 0
+[04/Jan/2023 01:52:14] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 2281
+[04/Jan/2023 01:52:14] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2138
+[04/Jan/2023 01:52:14] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 1360
+[04/Jan/2023 01:52:14] "GET /static/admin/css/base.css HTTP/1.1" 200 16307
+[04/Jan/2023 01:52:14] "GET /static/admin/css/login.css HTTP/1.1" 200 1185
+[04/Jan/2023 01:52:14] "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+[04/Jan/2023 01:52:18] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[04/Jan/2023 01:52:18] "GET /admin/ HTTP/1.1" 200 8872
+[04/Jan/2023 01:52:18] "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+[04/Jan/2023 01:52:18] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+[04/Jan/2023 01:52:18] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+[04/Jan/2023 01:52:23] "GET /admin/backend/template2button/ HTTP/1.1" 200 15955
+[04/Jan/2023 01:52:23] "GET /static/admin/css/changelists.css HTTP/1.1" 200 6302
+[04/Jan/2023 01:52:23] "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+[04/Jan/2023 01:52:23] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
+[04/Jan/2023 01:52:23] "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+[04/Jan/2023 01:52:24] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+[04/Jan/2023 01:52:24] "GET /static/admin/js/actions.js HTTP/1.1" 200 6783
+[04/Jan/2023 01:52:24] "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+[04/Jan/2023 01:52:24] "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+[04/Jan/2023 01:52:25] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+[04/Jan/2023 01:52:25] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 287630
+[04/Jan/2023 01:52:26] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+[04/Jan/2023 01:52:42] "GET /admin/backend/template2button/add/ HTTP/1.1" 200 8194
+[04/Jan/2023 01:52:42] "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+[04/Jan/2023 01:52:42] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+[04/Jan/2023 01:52:42] "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+[04/Jan/2023 01:52:42] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
+[04/Jan/2023 01:52:42] "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+[04/Jan/2023 01:53:30] "POST /admin/backend/template2button/add/ HTTP/1.1" 302 0
+[04/Jan/2023 01:53:31] "GET /admin/backend/template2button/ HTTP/1.1" 200 16556
+[04/Jan/2023 01:53:31] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
+[04/Jan/2023 01:53:31] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+[04/Jan/2023 01:57:07] "GET /admin/ HTTP/1.1" 302 0
+[04/Jan/2023 01:57:08] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 2281
+[04/Jan/2023 01:57:08] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 1360
+[04/Jan/2023 01:57:08] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2138
+[04/Jan/2023 01:57:08] "GET /static/admin/css/base.css HTTP/1.1" 200 16307
+[04/Jan/2023 01:57:08] "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+[04/Jan/2023 01:57:08] "GET /static/admin/css/login.css HTTP/1.1" 200 1185
+[04/Jan/2023 01:57:08] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+[04/Jan/2023 01:57:08] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+[04/Jan/2023 01:57:09] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+[04/Jan/2023 02:06:50] "GET /admin/backend/group/ HTTP/1.1" 200 11498
+[04/Jan/2023 02:06:50] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
+[04/Jan/2023 02:06:54] "GET /admin/backend/group/13/change/ HTTP/1.1" 200 17268
+[04/Jan/2023 02:06:55] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
+[04/Jan/2023 02:06:55] "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+[04/Jan/2023 02:17:07] "POST /admin/backend/group/13/change/ HTTP/1.1" 302 0
+[04/Jan/2023 02:17:07] "GET /admin/backend/group/ HTTP/1.1" 200 11711
+[04/Jan/2023 02:17:08] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
+Not Found: /favicon.ico
+[04/Jan/2023 02:17:08] "GET /favicon.ico HTTP/1.1" 404 1975
+/root/ModerBot/app/backend/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 04, 2023 - 01:50:20
+Django version 3.1.6, using settings 'core.settings'
+Starting development server at http://0.0.0.0:1234/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+/root/ModerBot/app/backend/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 04, 2023 - 02:18:25
+Django version 3.1.6, using settings 'core.settings'
+Starting development server at http://0.0.0.0:1234/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[04/Jan/2023 02:21:06] "GET /admin/backend/group/13/change/ HTTP/1.1" 200 17262
+[04/Jan/2023 02:21:07] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
+[04/Jan/2023 02:21:13] "POST /admin/backend/group/13/change/ HTTP/1.1" 302 0
+[04/Jan/2023 02:21:13] "GET /admin/backend/group/ HTTP/1.1" 200 11711
+[04/Jan/2023 02:21:14] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
+[04/Jan/2023 02:22:55] "GET /admin/backend/group/13/change/ HTTP/1.1" 200 17270
+[04/Jan/2023 02:22:55] "GET /admin/jsi18n/ HTTP/1.1" 200 14892
